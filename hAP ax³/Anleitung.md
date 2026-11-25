@@ -4,8 +4,9 @@ Diese Datei macht aus einem hAP ax³ einen Reiserouter: Handy-Seite zum Bedienen
 VPN nach Hause per Import (mehrere Profile), Werbeblocker. Sie enthält **keine persönlichen Einstellungen** – Zugang,
 WLAN, VPN und Werbeblocker legst du danach im Assistenten der Handy-Seite fest.
 
-**Datei:** `reiserouter-install-hap-ax3.rsc` in diesem Ordner (rund 3,6 MB, Prozessor arm64). Sie läuft auch auf dem
-hAP ax² (gleicher Prozessor), das Modell erkennt der Installer selbst.
+**Datei:** `reiserouter-install-hap-ax3.rsc.zip` in diesem Ordner. Entpacken – auf den Router kommt die enthaltene
+`reiserouter-install-hap-ax3.rsc` (rund 3,6 MB, Prozessor arm64). Sie läuft auch auf dem hAP ax² (gleicher
+Prozessor), das Modell erkennt der Installer selbst.
 
 > **Achtung:** Der Installer setzt das Gerät zurück. Nur auf einem neuen Gerät verwenden oder auf einem, dessen
 > Einstellungen weg dürfen.
@@ -26,8 +27,8 @@ hAP ax² (gleicher Prozessor), das Modell erkennt der Installer selbst.
    Router startet neu. Nötig ist mindestens RouterOS 7.19 (erprobt mit 7.24.6).
 
 ## 2. Installieren
-1. `reiserouter-install-hap-ax3.rsc` aus diesem Ordner in WinBox › **Files** ziehen (im Browser: WebFig › Files ›
-   Upload).
+1. `reiserouter-install-hap-ax3.rsc.zip` entpacken und die `reiserouter-install-hap-ax3.rsc` in WinBox › **Files**
+   ziehen (im Browser: WebFig › Files › Upload).
 2. WinBox › **New Terminal** öffnen und eingeben:
    ```
    /import reiserouter-install-hap-ax3.rsc
@@ -52,6 +53,8 @@ hAP ax² (gleicher Prozessor), das Modell erkennt der Installer selbst.
       FAH-Adblock-Datei
 
    Alles geht auch später auf der Handy-Seite unter „VPN & Schutz“.
+
+   <img src="../bilder/09-ersteinrichtung.png" width="260" alt="Ersteinrichtung, Schritt 1">
 
 WinBox erreicht den Router danach unter **192.168.77.1**, WebFig unter **http://192.168.77.1:8080**.
 
@@ -88,5 +91,4 @@ Fortschritt und Fehler zeigt im Terminal `/log print where message~"Reise-Instal
 Der Ablauf lief vollständig in der Test-VM (RouterOS-CHR, gleicher Prozessor arm64, gleicher Inhalt dieser Datei): Seite, Anmeldung admin/admin, Assistent, zwei VPN-Profile, danach galt nur noch das neue Passwort. Auf einem echten hAP ax³ noch nicht erprobt ist der WLAN-Teil (Umbenennen der Funkteile, eigenes WLAN, Hotel-WLAN).
 
 ---
-Gebaut wird die Datei im Ordner `reiserouter/Installscript` mit `python3 installer-bauen.py`, nach jeder Änderung an
-Skripten oder Handy-Seite neu bauen. Die `.rsc`-Datei steht nicht im Git, diese Anleitung schon.
+Bauzeit und Prozessor stehen in der ersten Zeile der `.rsc`-Datei. Bilder der Handy-Seite: [`../bilder`](../bilder/).

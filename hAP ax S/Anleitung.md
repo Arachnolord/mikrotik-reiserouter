@@ -4,8 +4,9 @@ Diese Datei macht aus einem hAP ax S einen Reiserouter: Handy-Seite zum Bedienen
 VPN nach Hause per Import (mehrere Profile), Werbeblocker. Sie enthält **keine persönlichen Einstellungen** – Zugang,
 WLAN, VPN und Werbeblocker legst du danach im Assistenten der Handy-Seite fest.
 
-**Datei:** `reiserouter-install-hap-ax-s.rsc` in diesem Ordner (rund 3,8 MB, Prozessor arm). Sie läuft auch auf dem
-hAP ac³ (gleicher Prozessor), das Modell erkennt der Installer selbst.
+**Datei:** `reiserouter-install-hap-ax-s.rsc.zip` in diesem Ordner. Entpacken – auf den Router kommt die enthaltene
+`reiserouter-install-hap-ax-s.rsc` (rund 3,8 MB, Prozessor arm). Sie läuft auch auf dem hAP ac³ (gleicher
+Prozessor), das Modell erkennt der Installer selbst.
 
 > **Achtung:** Der Installer setzt das Gerät zurück. Nur auf einem neuen Gerät verwenden oder auf einem, dessen
 > Einstellungen weg dürfen. Das gilt besonders für einen hAP ax S, der schon als Reiserouter läuft.
@@ -26,8 +27,8 @@ hAP ac³ (gleicher Prozessor), das Modell erkennt der Installer selbst.
    Router startet neu. Nötig ist mindestens RouterOS 7.19 (erprobt mit 7.24.6).
 
 ## 2. Installieren
-1. `reiserouter-install-hap-ax-s.rsc` aus diesem Ordner in WinBox › **Files** ziehen (im Browser: WebFig › Files ›
-   Upload).
+1. `reiserouter-install-hap-ax-s.rsc.zip` entpacken und die `reiserouter-install-hap-ax-s.rsc` in WinBox › **Files**
+   ziehen (im Browser: WebFig › Files › Upload).
 2. WinBox › **New Terminal** öffnen und eingeben:
    ```
    /import reiserouter-install-hap-ax-s.rsc
@@ -52,6 +53,8 @@ hAP ac³ (gleicher Prozessor), das Modell erkennt der Installer selbst.
       FAH-Adblock-Datei
 
    Alles geht auch später auf der Handy-Seite unter „VPN & Schutz“.
+
+   <img src="../bilder/09-ersteinrichtung.png" width="260" alt="Ersteinrichtung, Schritt 1">
 
 WinBox erreicht den Router danach unter **192.168.77.1**, WebFig unter **http://192.168.77.1:8080**.
 
@@ -88,5 +91,4 @@ Fortschritt und Fehler zeigt im Terminal `/log print where message~"Reise-Instal
 Die Einrichtung entspricht dem hAP ax S, auf dem der Reiserouter entstanden ist und im Alltag läuft. Der Installer selbst lief bisher nur in der Test-VM (RouterOS-CHR, Prozessor arm64). Auf einem echten hAP ax S ist er noch nicht erprobt, auch nicht mit dem arm-Programm der Handy-Seite.
 
 ---
-Gebaut wird die Datei im Ordner `reiserouter/Installscript` mit `python3 installer-bauen.py`, nach jeder Änderung an
-Skripten oder Handy-Seite neu bauen. Die `.rsc`-Datei steht nicht im Git, diese Anleitung schon.
+Bauzeit und Prozessor stehen in der ersten Zeile der `.rsc`-Datei. Bilder der Handy-Seite: [`../bilder`](../bilder/).

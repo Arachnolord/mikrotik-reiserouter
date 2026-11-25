@@ -4,8 +4,9 @@ Diese Datei macht aus einem hAP ac³ einen Reiserouter: Handy-Seite zum Bedienen
 VPN nach Hause per Import (mehrere Profile), Werbeblocker. Sie enthält **keine persönlichen Einstellungen** – Zugang,
 WLAN, VPN und Werbeblocker legst du danach im Assistenten der Handy-Seite fest.
 
-**Datei:** `reiserouter-install-hap-ac3.rsc` in diesem Ordner (rund 3,8 MB, Prozessor arm). Sie läuft auch auf dem
-hAP ax S (gleicher Prozessor), das Modell erkennt der Installer selbst.
+**Datei:** `reiserouter-install-hap-ac3.rsc.zip` in diesem Ordner. Entpacken – auf den Router kommt die enthaltene
+`reiserouter-install-hap-ac3.rsc` (rund 3,8 MB, Prozessor arm). Sie läuft auch auf dem hAP ax S (gleicher
+Prozessor), das Modell erkennt der Installer selbst.
 
 > **Achtung:** Der Installer setzt das Gerät zurück. Nur auf einem neuen Gerät verwenden oder auf einem, dessen
 > Einstellungen weg dürfen.
@@ -27,8 +28,8 @@ hAP ax S (gleicher Prozessor), das Modell erkennt der Installer selbst.
    **Läuft noch RouterOS 6** (ältere hAP ac³): zuerst mit Kanal **upgrade** auf RouterOS 7, danach mit **long-term** auf den aktuellen Stand.
 
 ## 2. Installieren
-1. `reiserouter-install-hap-ac3.rsc` aus diesem Ordner in WinBox › **Files** ziehen (im Browser: WebFig › Files ›
-   Upload).
+1. `reiserouter-install-hap-ac3.rsc.zip` entpacken und die `reiserouter-install-hap-ac3.rsc` in WinBox › **Files**
+   ziehen (im Browser: WebFig › Files › Upload).
 2. WinBox › **New Terminal** öffnen und eingeben:
    ```
    /import reiserouter-install-hap-ac3.rsc
@@ -53,6 +54,8 @@ hAP ax S (gleicher Prozessor), das Modell erkennt der Installer selbst.
       FAH-Adblock-Datei
 
    Alles geht auch später auf der Handy-Seite unter „VPN & Schutz“.
+
+   <img src="../bilder/09-ersteinrichtung.png" width="260" alt="Ersteinrichtung, Schritt 1">
 
 WinBox erreicht den Router danach unter **192.168.77.1**, WebFig unter **http://192.168.77.1:8080**.
 
@@ -89,5 +92,4 @@ Fortschritt und Fehler zeigt im Terminal `/log print where message~"Reise-Instal
 Noch nicht auf einem echten hAP ac³ erprobt, auch der Treibertausch nicht. Der Ablauf lief vollständig in der Test-VM (RouterOS-CHR, Prozessor arm64), dort gibt es aber kein WLAN.
 
 ---
-Gebaut wird die Datei im Ordner `reiserouter/Installscript` mit `python3 installer-bauen.py`, nach jeder Änderung an
-Skripten oder Handy-Seite neu bauen. Die `.rsc`-Datei steht nicht im Git, diese Anleitung schon.
+Bauzeit und Prozessor stehen in der ersten Zeile der `.rsc`-Datei. Bilder der Handy-Seite: [`../bilder`](../bilder/).
