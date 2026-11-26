@@ -57,6 +57,10 @@ Schritt für Schritt mit Fehlerhilfe steht in der Anleitung des jeweiligen Gerä
 - **VPN & Schutz:** WireGuard-Profile per `.conf`-Import (z. B. aus UniFi), umbenennen, umschalten; Automatik
   „zu Hause aus, unterwegs an“, Modus „Nur Heimnetz“ oder „Alles“. Werbeblocker mit eigenen Sperrlisten oder
   FAH-Adblock über verschlüsseltes DNS (DoH), mit Rückfall auf die eigenen Listen.
+- **Sichere Verbindung:** https://reiserouter.lan mit einer eigenen Zertifizierungsstelle je Router, einmal je Gerät
+  installiert (Apple-Profil oder `.crt` für Android/Windows, Anleitung auf der Seite; am Mac danach in der
+  Schlüsselbundverwaltung für SSL „Immer vertrauen“ setzen, sonst vertraut nur Chrome/Brave). Sie gilt nur für reiserouter.lan,
+  nicht für andere Seiten und nicht für IP-Adressen; das Zertifikat erneuert sich selbst. http bleibt erreichbar.
 - **Hell und dunkel**, Handy und Desktop.
 
 Schlüssel und Passwörter liegen nur am Router, die Seite zeigt sie nie an. Das Router-Log speichert
@@ -75,6 +79,8 @@ Alle Bilder stammen aus einer Router-Attrappe mit erfundenen Namen, MAC- und IP-
 | <img src="bilder/04-geraete.png" width="240" alt="Geräte"> | <img src="bilder/05-leistung.png" width="240" alt="Leistung"> | <img src="bilder/06-netzwerk.png" width="240" alt="Netzwerk"> |
 | **VPN-Profile** | **Werbeblocker** | **Ersteinrichtung** |
 | <img src="bilder/07-vpn-profile.png" width="240" alt="VPN-Profile"> | <img src="bilder/08-werbeblocker-fah.png" width="240" alt="Werbeblocker"> | <img src="bilder/09-ersteinrichtung.png" width="240" alt="Ersteinrichtung"> |
+| **Sichere Verbindung** | | |
+| <img src="bilder/13-sichere-verbindung.png" width="240" alt="Sichere Verbindung"> | | |
 
 **Desktop**
 
@@ -88,6 +94,9 @@ Alle Bilder stammen aus einer Router-Attrappe mit erfundenen Namen, MAC- und IP-
 - Die Handy-Seite läuft als Container aus dem offiziellen `busybox` (Docker Hub, rund 2 MB). Beim ersten Start setzt
   er Seitenprogramm und Seite aus den Stücken zusammen, danach werden die Stücke gelöscht.
 - Aus dem Internet lädt der Router nur MikroTik-Pakete (download.mikrotik.com) und busybox.
+- Für https legt das Seitenprogramm beim ersten Start eine eigene CA an: kritische Name Constraints (nur DNS
+  reiserouter.lan, alle IPv4/IPv6 ausgeschlossen), pathlen 0, 10 Jahre; Serverzertifikat nur für reiserouter.lan,
+  800 Tage, Erneuerung 30 Tage vor Ablauf. Die Schlüssel bleiben auf dem Router (nie in Sicherungen).
 - Bei hAP ax², ax³ und ac³ benennt der Installer die Funkteile um: `wifi1` ist immer 2,4 GHz (eigenes WLAN),
   `wifi2` immer 5 GHz (Hotel-WLAN). Beim hAP ac³ tauscht er den Treiber `wireless` gegen `wifi-qcom-ac`.
 

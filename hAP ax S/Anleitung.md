@@ -58,13 +58,36 @@ Prozessor), das Modell erkennt der Installer selbst.
 
 WinBox erreicht den Router danach unter **192.168.77.1**, WebFig unter **http://192.168.77.1:8080**.
 
+## Sichere Verbindung (https)
+Die Handy-Seite gibt es auch verschlüsselt unter **https://reiserouter.lan**. Jeder Router erzeugt dafür beim ersten Start
+seine **eigene Zertifizierungsstelle (CA)**. Sie gilt nur für reiserouter.lan, nicht für andere Seiten und nicht für
+IP-Adressen. Selbst wer den Router stiehlt, kann damit keine fremde Seite fälschen.
+
+1. Handy-Seite öffnen › **System › Sichere Verbindung › Zertifikat installieren**.
+2. Das eigene System aufklappen und den Schritten folgen:
+   - **iPhone/iPad:** Profil in Safari laden › Einstellungen › Allgemein › VPN und Geräteverwaltung › Installieren ›
+     danach Einstellungen › Allgemein › Info › **Zertifikatsvertrauenseinstellungen** › Schalter einschalten.
+   - **Mac:** Profil laden › Systemeinstellungen › Allgemein › Geräteverwaltung › Profil installieren. **Danach unbedingt:**
+     Schlüsselbundverwaltung (⌘-Leertaste) › Anmeldung › Zertifikate › „Reiserouter CA …“ doppelklicken › Vertrauen ›
+     „SSL (Secure Sockets Layer)“: „Immer vertrauen“, mit dem Mac-Passwort bestätigen. macOS gibt einem selbst installierten
+     Profil kein Vertrauen für https – ohne diesen Schritt öffnen nur Chrome und Brave die Seite ohne Warnung, Safari nicht.
+   - **Android:** `.crt` laden › Einstellungen › Sicherheit › Verschlüsselung und Anmeldedaten › CA-Zertifikat installieren.
+   - **Windows:** `.crt` öffnen › Zertifikat installieren › Lokaler Computer › Vertrauenswürdige Stammzertifizierungsstellen.
+3. Den Fingerabdruck auf der Seite mit dem auf dem Gerät vergleichen.
+
+Das ist einmal je Gerät nötig, danach nie wieder: Der Router erneuert sein Zertifikat selbst. http://reiserouter.lan
+bleibt immer erreichbar (Gäste, erste Einrichtung). Auf http zeigt die Seite einen dezenten Hinweis „Sichere Seite
+öffnen“, sobald das Gerät die CA kennt.
+
+<img src="../bilder/13-sichere-verbindung.png" width="260" alt="Sichere Verbindung">
+
 ## Was eingerichtet ist
 - **Ports:** Port 1 = Internet (Kabel). Port 2–5 und der SFP-Port = eigenes Netz.
 - **Funk:** Ab Werk schon richtig: `wifi1` = 2,4 GHz, `wifi2` = 5 GHz. Der Installer benennt nichts um. Das eigene WLAN läuft auf 2,4 GHz. Das 5-GHz-Funkteil verbindet sich bei Bedarf mit einem
   Hotel-WLAN, das du auf der Handy-Seite auswählst.
 - **Eigenes Netz** 192.168.77.0/24: Router 192.168.77.1, Geräte bekommen .100–.250, Name `reiserouter.lan`.
 - **Sicheres DNS** (Cloudflare über HTTPS) und die Werbeblocker-Liste StevenBlack.
-- **Handy-Seite** auf Port 80, als Container `reiseapp` aus dem offiziellen busybox.
+- **Handy-Seite** auf Port 80 (http) und 443 (https), als Container `reiseapp` aus dem offiziellen busybox.
 - **Router-Log ohne Werte:** Einstellungsänderungen stehen ohne ihren Inhalt im Log, damit VPN-Schlüssel und die
   FAH-Adblock-Adresse dort nicht auftauchen. Anmeldungen stehen weiter im Log.
 
@@ -79,6 +102,7 @@ Fortschritt und Fehler zeigt im Terminal `/log print where message~"Reise-Instal
 | `Paket … nicht ladbar` | Port 1 hat kein Internet. Kabel prüfen, dann im Terminal `/import reiseapp/install.rsc`. |
 | Reset-Taste verpasst, der Router startet nicht neu | Im Terminal `/import reiseapp/install.rsc` eingeben oder den Strom aus- und wieder einschalten. Die Bitte steht dann erneut im Log. |
 | `Kein Internet an Port 1 - busybox …` | Die Handy-Seite kommt von selbst, sobald Port 1 Internet hat. |
+| https://reiserouter.lan warnt | Das Gerät kennt die CA noch nicht (siehe „Sichere Verbindung“) oder fragt per IP – https gilt nur für den Namen reiserouter.lan. |
 | Seite nach 10 Minuten nicht da | WinBox auf 192.168.77.1 (admin/admin) und das Log wie oben ansehen. |
 
 ## Noch mal von vorn (nicht erprobt)
